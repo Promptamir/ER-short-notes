@@ -1,0 +1,98 @@
+﻿Requirements: User Requirement Specification (end-user requirements for a system) and Functional Requirement Specification (What the system must do)
+|
+.
+Conceptual Design: The requirements of database are captured using high level conceptual data model. For Example, the ER model is used for the conceptual design of the database.
+|
+.
+Logical Design: Logical Design represents data in the form of relational model. ER diagram produced in the conceptual design phase is used to convert the data into the Relational Model. 
+|
+.
+Physical Design: In physical design, data in relational model is implemented using commercial DBMS like Oracle, DB2.
+#TODO MUST READ https://stackoverflow.com/questions/1761533/database-alternatives
+
+Two major pitfalls in designing a database schema:
+1. Redundancy : Multiple copies of the same information are stored in more than one place at a time. (Unnecessarily).
+2. Incompleteness : When a fact (tuple) has to be inserted in a relation, and values for some required columns are missing.
+
+The Entity-Relationship (E-R) data model: It was developed to facilitate database design by allowing specification of an enterprise schema that represents the overall logical structure of a database.
+
+Entity set : It's a "thing" or "object" in the real world that is distinguishable from all other objects. ex: Each person in a university is an entity.
+An entity has a set of properties, and the values for some set of properties must uniquely identify an entity.
+An entity set is a set of entities of the same type that share the same properties or attributes.
+Extension : Extension of the entity set refers to the actual collection of entities belonging to the entity set.
+Attributes : Descriptive properties set expresses that the database stores similar information concerning each entity in the entity set and each entity may have its own value for each attribute.
+Each entity has a value for each of its attributes. For instance, a particular instructor entity may have the value 12121 for ID.
+An attribute of a relationship set represents in a E-R diagram by an undivided rectangle.
+
+Relation set : A relationship is an association among several entities. 
+A relationship instance is an E-R schema represents an association between the named entities in the real-world enterprise that is being modeled.
+A relationship set is represented in an E-R diagram by a diamond, which is linked via lines to a number of different entity sets (rectangles).
+The function that an entity plays in a relationship is called that entity's role.
+Recursive relationship set : When the entity sets of a relationship set are not distinct; that is, the same entity set participates in a relationship set more than once, in different roles.
+Descriptive attributes : The attribute(s) used for describing the relationship is called descriptive attributes, also referred as relationship attributes.
+Binary relationship : One that involves two entity sets.
+Degree of the relationship set : The number of entity sets that participate in a relationship set.
+Ternary relationship set :  It's a set of degree 3.
+
+Type of attributes : #TODO MUST READ https://www.gatevidyalay.com/types-of-attributes/
+    1. Simple attributes : Not have been divided into subparts
+    2. Composite attributes :  They can be divided into subparts.
+    3. Single valued attributes : Attributes in an entity that refers to only one value.
+    4. Multi valued attributes : Attributes in an entity that refers to multiple values.
+    5. Derived attributes : If a attribute's value can be derived from the values of other attributes, then the attributes is derivable, and is said to be a derived attribute.
+    6. Key attributes : It's a data item which is used to identify a record or a value used to identify a record in a database.
+ 
+null : An attribute takes a null value when an entity does not have a value for it. the null value may indicate "not applicable"--that is, the value does not exist for the entity.
+
+Mapping Cardinalities ( Cardinality ratios) : It expresses the number of entities to which another entity can be associated via a relationship set.
+
+For a binary relationship set R between entity sets A and B, the mapping cardinality must be one of the following :
+    1. One-to-one (1:1) : An entity in A is associated with at most one entity in B, and an entity in B is associated with at most one entity in A.
+	2. One-to-many (1:N) : An entity in A is associated with any number (zero or more) of entities in B. An entity in B, however, can be associated with at most one entity in A.
+	3. Many-to-one (N:1) : An entity in A is associated with at most one entity in B. An entity in B, however, can be associated with any number (zero or more) of entities in A.
+	4. Many-to-many (N:N) : An entity in A is associated with any number (zero or more) of entities.
+In te E-R diagram notation, we indicate cardinality constraints on a relationship by drawing either a directed line ( --> | Many to one ) or an undirected line ( -- | Many to many) between the relationship set.
+
+#TODO MUST READ https://www.ques10.com/p/9460/explain-total-participation-and-partial-participat/
+
+Participation Constraints : Participation Constraints tell us that the participation in a relationship can either be total or partial. 
+Total participation : When each entity in an entity set participates in a relation. (R = E)
+Partial participation : When all entities in the given entity set do not participate in a relation. (R - E)
+
+Cardinality limits :  A line may have an associated minimum and maximum cardinality, shown in the form l..h, where l is the minimum and h the maximum cardinality. Maximum value * indicates no limit.
+ex:
+	|instruct|								     | stud.|
+	|________|----0..*---- advisor -1..1-  |_______|
+	|________|									|_______|
+	
+	1..1 : min and max cardinality are both 1 (each student must have exactly one advisor)
+    0.. * : It indicates that instructor can have zero or more students.
+
+Types of keys in DBMS :
+
+#TODO MUST READ https://www.javatpoint.com/dbms-keys
+	1. Primary key : It is the first key used to identify one and only one instance of an entity uniquely.
+	2. Candidate key : It is an attribute or set of attributes that can uniquely identify a tuple that it's as strong as the primary key.
+	3. Super key : Super key is an attribute set that can uniquely identify a tuple. A super key is a superset of a candidate key.
+	4. Foreign key : It is the column of the table use to point to the primary key of another table.
+	5. Alternate key : -
+	6. Composite key : -
+	7. Artificial key : -
+
+** Primary Key ** : 
+ 
+ We must have a way to specify how entities within a given entity set and relationships within a given relationship set are distinguished.
+ Entity sets : Conceptually, individual entities are distinct; from a database perspective, however, the differences among them must be expressed in terms of their attributes. Therefore, the values of the attribute values of an entity must be such that they can uniquely indentify the entity. In other words. no two entities in an entity set are allowed to have exactly the same value for all attributes.
+ Relationships : We need a mechanism to distinguish among the various relationships of a relationship set.
+ 
+ #TODO MUST READ https://opentextbc.ca/dbdesign01/
+ The choice of the primary key for a binary relationship set depends on the mapping cardinality of the relationship set : 
+ 
+ 1. Many-to-many relationships : The preceding union of the primary keys is a minimal superkey and is chosen as the primary key :
+ The entity sets instructor and student, and the relationship set advisor. Suppose that the relationship set is many-to-many. Then the primary key of advisor consists of the union of the primary keys of instructor and student.
+ 2. One-to-many and many-to-one relationships : The primary key of the "many" side is a minimal superkey and is used as the primary key :
+ If the relationship is many-to-one from student to instructor-that is, each student can have at most one advisor-then the primary key of advisor is simply the primary key of student. However, if an instructor can advise only one student-that is, if the advisor relationship is many-to-one from instructor to student-then the primary key of advisor is simply the primary key of instructor.
+ 3. One-to-one relationships : The primary key of either one of the participating entity sets forms a minimal superkey, and either on can be chosen as the primary key of the relationship set :
+ If an instructor can advise only one student,, and each student can be advised by only one instructor-that is, if the advisor relationship is one-to-one-then the primary key of either student or instructor can be chosen as the primary key for advisor.
+ 4.  For nonbinary relationships, if no cardinality constraints are present, then the superkey formed is the only candidate key, and it is chosen as primary key.
+ 
