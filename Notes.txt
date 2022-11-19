@@ -88,11 +88,28 @@ Types of keys in DBMS :
  #TODO MUST READ https://opentextbc.ca/dbdesign01/
  The choice of the primary key for a binary relationship set depends on the mapping cardinality of the relationship set : 
  
- 1. Many-to-many relationships : The preceding union of the primary keys is a minimal superkey and is chosen as the primary key :
+ 1. Many-to-many relationships : The preceding union of the primary keys is a minimal super key and is chosen as the primary key :
  The entity sets instructor and student, and the relationship set advisor. Suppose that the relationship set is many-to-many. Then the primary key of advisor consists of the union of the primary keys of instructor and student.
- 2. One-to-many and many-to-one relationships : The primary key of the "many" side is a minimal superkey and is used as the primary key :
+ 2. One-to-many and many-to-one relationships : The primary key of the "many" side is a minimal super key and is used as the primary key :
  If the relationship is many-to-one from student to instructor-that is, each student can have at most one advisor-then the primary key of advisor is simply the primary key of student. However, if an instructor can advise only one student-that is, if the advisor relationship is many-to-one from instructor to student-then the primary key of advisor is simply the primary key of instructor.
- 3. One-to-one relationships : The primary key of either one of the participating entity sets forms a minimal superkey, and either on can be chosen as the primary key of the relationship set :
+ 3. One-to-one relationships : The primary key of either one of the participating entity sets forms a minimal super key, and either on can be chosen as the primary key of the relationship set :
  If an instructor can advise only one student,, and each student can be advised by only one instructor-that is, if the advisor relationship is one-to-one-then the primary key of either student or instructor can be chosen as the primary key for advisor.
- 4.  For nonbinary relationships, if no cardinality constraints are present, then the superkey formed is the only candidate key, and it is chosen as primary key.
+ 4. For non-binary relationships, if no cardinality constraints are present, then the super key formed is the only candidate key, and it is chosen as primary key.
+ The choice of the primary key is more complicated if cardinality constraints are present. we permit at most one arrow out of a relationship set. We do so because an E-R diagram with two or more arrows out of a non-binary relationship set can be interpreted in the two ways we describe below
+ Suppose there is a relationship set R between entity sets E1, E2, E3, E4, and the only arrows are on the edges to entity sets E3 and E4. Then, the two possible interpretations are :
+ 1. A particular combination  of entities from E1, E2 can be associated with at most one combination of entities from E3, E4. Thus, the primary key for the relationship R can be constructed by the union of the primary keys of E1 and E2
+ 2. A particular combination of entities from E1, E2, E3 can be associated with at most one combination of entities from E4, and further a particular combination of entities from E1, E2, E4 can be associated with at most one combination of entities from E3, Then the union of the primary keys of E1, E2, and E3 forms a candidate key, as does the union of the primary keys of E1, E2, and E4.
+ 
+ In order to represent a situation where on the the multiple-arrow situations holds, the E-R design can be modified by replacing the non-binary relationship set with an entity set. That is, we treat each instance of the non-binary relationship set with an entity set.
+ That is, we treat instance of the non-binary relationship set as in entity.
+ Then we can relate each of those entities to corresponding instances of E1, E2, E4 via separate relationship sets. A simpler approach is to use functional dependencies,
+ Functional dependencies which allow either of these interpretations to be specified simply in a unambiguous manner.
+ The primary key for the relationship set R is then union of the primary keys of those participating entity sets Ei that do not have an incoming arrow from the relationship set R.
+ 
+ Weak entity set : It is one whose existence us dependent on another entity set, called its identifying entity set; instead of associating a primary key with a weak entity, we use the primary key of the identifying entity, along with extra attributes, called discriminator attributes to uniquely identify a weak entity. An entity set that is not a weak entity set termed a strong entity set.
+ Every weak entity must b associated with an identifying entity; that is, the weak entity set is said to be existence dependent on the identifying entity set. The identifying entity set is said to own the weak entity set that is identifies.
+ The relationship associating the weak entity set with the identifying entity set is called the identifying relationship.
+  
+ 
+ 
  
