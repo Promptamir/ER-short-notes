@@ -114,5 +114,153 @@ Types of keys in DBMS :
  Partial key is an attribute of a weak entity type that combined with the identifying relationships will identify entities of the entity type.
 
  Removing Redundant Attributes in Entity Sets :
+ Data redundancy occurs in database systems which have a field that is repeated in two or more tables.
+ Duplicated data is present when an attribute has two ( or more ) identical values. A data value is redundant if you can delete it without information being list. In other words, redundancy is unnecessary duplication.
+ #TODO MUST READ https://www.relationaldbdesign.com/database-analysis/module3/reduce-data-redundancy.php
+ Normalization and removing Duplication in Data :
+ It means to make normal of causing something to conform to a standard, or to introduce consistency with respect to style and content. In terms of relational modeling, that consistency becomes a process of removing duplication in data.
  
+ Reducing E-R Diagrams to Relational Schemas :
+ 
+ Step 1 - Conversion of strong entities 
+ For each strong entity create a separate table with the same name.
+ Includes all attributes, if there is any composite attribute divided into simple attributes and has to be included.
+ Ignore multivalued attributes at this stage.
+ Select the p key for the table.
+ 
+ Step 2 - Conversion of weak entity
+ For each weak entity create a separate table with the same name.
+ Include all attributes.
+ Include the P key of a strong entity as foreign key is the weak entity.
+
+ Step 3 - Conversion of one-to-one relationship
+ For each one to many relationships, modify the M side to include the P key of one side as foreign key.
+ IF relationship consist of attributes, include them also in the new table.
+
+ Step 4 - Conversion of one-to-many relationship
+ For each one to one relation, say A and B modify either A side or B side to include the P key of the other side as a foreign key.
+ If A or B is having total participation, then that should be a modified table.
+ If a relationship consists of attributes, include them also in the modified table
+
+ Step 5 - Conversion of many-many relationship
+ For each many-many relationship, create a separate table including the P key of M side and N side as foreign keys in the new table.
+ Declare the combination of foreign keys as P for the new table.
+ If relationships consist of attributes, include them also in the new table.
+
+ Step 6 - Conversion of multivalued attributes
+ For each multivalued attribute create a separate table and include the P key of the present table as foreign key.
+ Declare the combination of foreign key and multivalued attribute as P keys.
+
+ Step 7 - Conversion of n-ary relationship
+ For each n-ary relationship create a separate table and include the P key of all entities as foreign key.
+ Declare the combination of foreign keys as P key.
+ 
+ Features of ER model :
+ Specialization - An entity set broken down sub-entities that are distinct in some way from other entities in the set. For instance, a subset of entities within an entity set may have attributes that are not shared by all the entities in the entity set. The E-R model provides a means for representing these distinctive entity groupings.
+ Generalization - It is a process of extracting common properties from a set of entities and creating a generalized entity from it. Generalization is a “Bottom-up approach”. In which two or more entities can be combined to form a higher-level entity if they have some attributes in common.
+ Inheritance – An entity that is a member of a subclass inherits all the attributes of the entity as the member of the superclass, the entity also inherits all the relationships that the superclass participates in. Inheritance is an important feature of Generalization and Specialization. It allows lower-level entities to inherit the attributes of higher-level entities.
+ Aggregation – In aggregation, the relation between two entities is treated as a single entity. In aggregation, the relationship with its corresponding entities is aggregated into a higher-level entity.
+ 
+ Entity-Relationship Design Issues :
+ Use of Entity Set vs Attributes
+ Use of Entity Set vs. Relationship Sets
+ Use of Binary vs n-ary Relationship Sets
+ Placing Relationship Attributes
+ 
+ Other Aspects of Database Design :
+ Functional Requirements
+ Data Flow, Workflow
+ Schema Evolution
+ 
+
+ Summary
+• Database design mainly involves the design of the database schema. The entity-
+relationship (E-R) data model is a widely used data model for database design.
+It provides a convenient graphical representation to view data, relationships, and
+constraints.
+• The E-R model is intended primarily for the database-design process. It was de-
+veloped to facilitate database design by allowing the specification of an enterprise
+schema. Such a schema represents the overall logical structure of the database.
+This overall structure can be expressed graphically by an E-R diagram.
+Review Terms 293
+• An entity is an object that exists in the real world and is distinguishable from other
+objects. We express the distinction by associating with each entity a set of attributes
+that describes the object.
+• A relationship is an association among several entities. A relationship set is a col-
+lection of relationships of the same type, and an entity set is a collection of entities
+of the same type.
+• The terms superkey, candidate key, and primary key apply to entity and relation-
+ship sets as they do for relation schemas. Identifying the primary key of a relation-
+ship set requires some care, since it is composed of attributes from one or more of
+the related entity sets.
+• Mapping cardinalities express the number of entities to which another entity can
+be associated via a relationship set.
+• An entity set that does not have sufficient attributes to form a primary key is termed
+a weak entity set. An entity set that has a primary key is termed a strong entity set.
+• The various features of the E-R model offer the database designer numerous
+choices in how to best represent the enterprise being modeled. Concepts and ob-
+jects may, in certain cases, be represented by entities, relationships, or attributes.
+Aspects of the overall structure of the enterprise may be best described by using
+weak entity sets, generalization, specialization, or aggregation. Often, the designer
+must weigh the merits of a simple, compact model versus those of a more precise,
+but more complex one.
+• A database design specified by an E-R diagram can be represented by a collection of
+relation schemas. For each entity set and for each relationship set in the database,
+there is a unique relation schema that is assigned the name of the corresponding
+entity set or relationship set. This forms the basis for deriving a relational database
+design from an E-R diagram.
+• Specialization and generalization define a containment relationship between a
+higher-level entity set and one or more lower-level entity sets. Specialization is
+the result of taking a subset of a higher-level entity set to form a lower-level entity
+set. Generalization is the result of taking the union of two or more disjoint (lower-
+level) entity sets to produce a higher-level entity set. The attributes of higher-level
+entity sets are inherited by lower-level entity sets.
+• Aggregation is an abstraction in which relationship sets (along with their asso-
+ciated entity sets) are treated as higher-level entity sets, and can participate in
+relationships.
+• Care must be taken in E-R design. There are a number of common mistakes to
+avoid. Also, there are choices among the use of entity sets, relationship sets, and
+294 Chapter 6 Database Design Using the E-R Model
+attributes in representing aspects of the enterprise whose correctness may depend
+on subtle details specific to the enterprise.
+• UML is a popular modeling language. UML class diagrams are widely used for
+modeling classes, as well as for general-purpose data modeling.
+
+Review Terms
+• Design Process
+° Conceptual-design
+° Logical-design
+° Physical-design
+• Entity-relationship (E-R) data model
+• Entity and entity set
+° Simple and composite attributes
+° Single-valued and multivalued at-
+tributes
+° Derived attribute
+• Key
+° Superkey
+° Candidate key
+° Primary key
+• Relationship and relationship set
+° Binary relationship set
+° Degree of relationship set
+° Descriptive attributes
+° Superkey, candidate key, and pri-
+mary key
+° Role
+° Recursive relationship set
+• E-R diagram
+• Mapping cardinality:
+° One-to-one relationship
+° One-to-many relationship
+° Many-to-one relationship
+° Many-to-many relationship
+• Total and partial participation
+• Weak entity sets and strong entity sets
+° Discriminator attributes
+° Identifying relationship
+• Specialization and generalization
+• Aggregation
+• Design choices
+• United Modeling Language (UML )
  
