@@ -53,6 +53,11 @@ For a binary relationship set R between entity sets A and B, the mapping cardina
 	4. Many-to-many (N:N) : An entity in A is associated with any number (zero or more) of entities.
 In te E-R diagram notation, we indicate cardinality constraints on a relationship by drawing either a directed line ( --> | Many to one ) or an undirected line ( -- | Many to many) between the relationship set.
 
+ps: m:n is used to denote a many-to-many relationship (m objects on the other side related to n on the other) while 1:n refers to a one-to-many relationship (1 object on the other side related to n on te other.)
+1:n --> "one-to-many"
+n:m n:n --> "many-to-many"
+
+
 #TODO MUST READ https://www.ques10.com/p/9460/explain-total-participation-and-partial-participat/
 
 Participation Constraints : Participation Constraints tell us that the participation in a relationship can either be total or partial. 
@@ -262,5 +267,5 @@ mary key
 • Specialization and generalization
 • Aggregation
 • Design choices
-• United Modeling Language (UML )
+• United Modeling Language (UML)
  
